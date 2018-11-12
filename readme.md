@@ -1,21 +1,3 @@
-D3 Data Pipeline Dashboard
-Dashaboard for monitoring AVF data pipelines
+<H2>AVF DATAPIPELINE DASHBOARD</H2>
+<P>D3 Based dashboard for monitoring AVF data pipeline dashboards</P>
 
-Getting Started
-
-Built With
-D3
-Bootsrap
-Css3
-Javascript
-Python
-
-Versioning
-
-
-Authors
-
-License
-
-
-Acknowledgments

@@ -1,4 +1,4 @@
-D3 Data dashboard for monitoring AVF data pipelines
+D3 Data pipeline dashboard
 
 Getting Started
 

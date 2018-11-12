@@ -1,5 +1,4 @@
-D3 Data Pipeline Dashboard
-Dashaboard for monitoring AVF data pipelines
+D3 Data Pipeline Dashboard for monitoring AVF data pipelines
 
 Getting Started
 

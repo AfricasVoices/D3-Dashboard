@@ -1,2 +1,1 @@
-## Data Pipeline Dashboard
-D3 Based dashboard for monitoring AVF data pipelines
+-A simple barchart in D3

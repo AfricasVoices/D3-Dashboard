@@ -93,6 +93,7 @@ const update = (data) => {
   yAxisGroup.call(yAxis);
 
 };
+
 //5. Configure to update in realtime from firestore
 var data = [];
 

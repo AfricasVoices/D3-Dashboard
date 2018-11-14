@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Nairobi",
+    "sms": 700,
+    "fill":"#f47d42"
+  },
+  {
+    "name": "Kisumu",
+    "sms": 600,
+    "fill":"#e58f64"
+  },
+  {
+    "name": "Mombasa",
+    "sms": 300,
+    "fill":"#f29c71"
+  },
+  {
+    "name": "Turkana",
+    "sms": 900,
+    "fill":"#f27d43"
+  },
+  {
+    "name": "Meru",
+    "sms": 1300,
+    "fill":"#fc6c25"
+  }
+]

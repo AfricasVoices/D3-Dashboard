@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+ <title>SVG Basics</title>
+  <style>
+  .h2{
+    text-align:left;
+    font-family:roboto;
+  }
+  </style>
+  <h2 class='h2'>SMS Feedback Per County</h2>
+</head>
+<body>
+  
+    <div class="canvas">
+    </div>  
+
+<script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-firestore.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCiVcO6RuGxMPMDI2SiTpjcdXtko-PFAbw",
+    authDomain: "learning-d3.firebaseapp.com",
+    databaseURL: "https://learning-d3.firebaseio.com",
+    projectId: "learning-d3",
+    storageBucket: "learning-d3.appspot.com",
+    messagingSenderId: "405879847462"
+  };
+  firebase.initializeApp(config);
+  const smsdb =firebase.firestore();
+  smsdb.settings({timestampsInSnapshots: true});
+</script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="barchartrealtime.js"></script>
+</body>
+</html>

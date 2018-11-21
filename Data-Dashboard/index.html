@@ -1,0 +1,60 @@
+<html>
+<meta charset="utf-8">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <title>Data Pipeline Dashboard</title>
+</head>
+<body class="blue-grey lighten-5">
+
+    <div class="nav z-depth-0">
+      <div class="section center">
+        <h4 class="white-text center">Data Pipeline Dashboard</h4>
+      </div> 
+    </div>
+    <div class="container section">
+    <div class="row">
+        <div >
+          <div class="canvas1"></div>
+        </div>
+        <div >
+          <div class="canvas2"></div>
+        </div>
+
+    </div>
+    <div class ="row">
+      <div >
+        <div class="canvas3"></div>
+      </div>
+      <div >
+        <div class="canvas4"></div>
+      </div>
+
+    </div>
+   
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-firestore.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCiVcO6RuGxMPMDI2SiTpjcdXtko-PFAbw",
+      authDomain: "learning-d3.firebaseapp.com",
+      databaseURL: "https://learning-d3.firebaseio.com",
+      projectId: "learning-d3",
+      storageBucket: "learning-d3.appspot.com",
+      messagingSenderId: "405879847462"
+    };
+      firebase.initializeApp(config);
+      const dashdb = firebase.firestore();
+      const settings = {timestampsInSnapshots: true};
+      dashdb.settings(settings);
+    </script>
+  <script src="https://d3js.org/d3.v5.js"></script>
+<script src="dash.js"></script>
+</body>
+</html>

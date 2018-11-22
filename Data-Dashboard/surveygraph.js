@@ -1,34 +1,34 @@
-const margin = { top: 40, right: 60, bottom: 50, left: 70 };
-const width = 800 - margin.right - margin.left;
-const height = 450 - margin.top - margin.bottom;
+const Margin = { top: 40, right: 60, bottom: 50, left: 70 };
+const Width = 800 - Margin.right - Margin.left;
+const Height = 450 - Margin.top - Margin.bottom;
 
 
 //Formating TimeStamp  
 var timeFormat = d3.timeFormat("%m-%d-%y %H:%M:%S");
 
 
-// append the svg obgect to the class canvas1 of the page
-// moves the svg object to the top left margin
+// append the svg obgect to the demograph class of the page
+// moves the svg object to the top left Margin
 
-var svg = d3.select(".canvas1").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+var surveygraph = d3.select(".surveygraph").append("svg")
+   .attr("width", Width + Margin.left + Margin.right)
+    .attr("height", Height + Margin.top + Margin.bottom)
   .append("g")
     .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+          "translate(" + Margin.left + "," + Margin.top + ")"); 
 
 
 // scales
-const x = d3.scaleTime().range([0, width]);
-const y = d3.scaleLinear().range([height, 0]);
+const x = d3.scaleTime().range([0, Width]);
+const y = d3.scaleLinear().range([Height, 0]);
 
 // update function
 const update = (data) => {
      //format the data
   data.forEach(function(d) {
     d.Date = +d.Date.toDate();
-    d.male = +d.male;
-    d.female = +d.female;
+    d.Qn1 = +d.Qn1;
+    d.Qn2 = +d.Qn2;
   });
   
 
@@ -36,7 +36,7 @@ const update = (data) => {
 
   // set scale domains
   x.domain(d3.extent(data, function(d) { return d.Date; }));
-  y.domain([0, d3.max(data, function(d) {return Math.max(d.male, d.female); })]);
+  y.domain([0, d3.max(data, function(d) {return Math.max(d.Qn1, d.Qn2); })]);
 
 
   // d3 line path generator
@@ -44,88 +44,87 @@ const update = (data) => {
 const valueline = d3.line()
 //.curve(d3.curveCardinal)
 .x(function(d) { return x(d.Date); })
-.y(function(d) { return y(d.male); });
+.y(function(d) { return y(d.Qn1); });
 
 // define the 2nd line
 const valueline2 = d3.line()
 //.curve(d3.curveCardinal)
 .x(function(d) { return x(d.Date); })
-.y(function(d) { return y(d.female); });
+.y(function(d) { return y(d.Qn2); });
 
   // update path data
         //line 1
-    svg.append('path')
+    surveygraph.append('path')
         .data([data])
         .attr("class", "line")
         .attr("d", valueline);
     
         //line 2
-    svg.append('path')
+    surveygraph.append('path')
         .data([data])
         .attr("class", "line")
         .style("stroke", "red")
         .attr("d", valueline2);
 
     // Add the X Axis
-  svg.append("g")
-  .attr("transform", "translate(0," + height + ")")
+  surveygraph.append("g")
+  .attr("transform", "translate(0," + Height + ")")
   .call(d3.axisBottom(x)
   .ticks(5)
     .tickFormat(timeFormat));
     // X axis label
-    svg.append("text")             
+    surveygraph.append("text")             
     .attr("transform",
-            "translate(" + (width/2) + " ," + 
-                        (height + margin.top + 10) + ")")
+            "translate(" + (Width/2) + " ," + 
+                        (Height + Margin.top + 10) + ")")
     .style("text-anchor", "middle")
     .text("Date(D:M:Y:T)");
     
     // Add the Y Axis
-  svg.append("g")
+    surveygraph.append("g")
     .attr("class", "axisSteelBlue")
     .call(d3.axisLeft(y));
   
   //Y axis Label
-    svg.append("text")
+  surveygraph.append("text")
         .attr("transform", "rotate(-90)")
-        .attr("y", 0 - margin.left)
-        .attr("x",0 - (height / 2))
+        .attr("y", 0 - Margin.left)
+        .attr("x",0 - (Height / 2))
         .attr("dy", "1em")
         .style("text-anchor", "middle")
         .text("Sms(s)");
-        const yAxis = d3.axisLeft(y)
-            .ticks(4)
 
 
-        //Female Line label
-      svg.append("text")
-      .attr("transform", "translate("+(width+3)+","+ y(data[7].female)+")")
+        //Qn2 Line label
+  //last = Object.keys(data)[Object.keys(data).length-1];
+      surveygraph.append("text")
+      .attr("transform", "translate("+(Width+3)+","+ y(data[4].Qn2)+")")
       .attr("dy", ".35em")
       .attr("text-anchor", "start")
       .style("fill", "red")
-      .text("Female");
-        //Male Line label
-      svg.append("text")
-      .attr("transform", "translate("+(width+3)+","+ y(data[7].male)+")")
+      .text("Qn2");
+        //Qn1 Line label
+      surveygraph.append("text")
+      .attr("transform", "translate("+(Width+3)+","+ y(data[4].Qn1)+")")
       .attr("dy", ".35em")
       .attr("text-anchor", "start")
       .style("fill", "steelblue")
-      .text("Male");
+      .text("Qn1");
 
       // Graph title
-        svg.append("text")
-        .attr("x", (width / 2))				
-        .attr("y", 0 - (margin.top / 2))
+      surveygraph.append("text")
+        .attr("x", (Width / 2))				
+        .attr("y", 0 - (Margin.top / 2))
         .attr("text-anchor", "middle")	
         .style("font-size", "20px") 
         .style("text-decoration", "bold") 	
-        .text("Gender SMS Response vs Time");
+        .text("MAAP Survey Questions Response");
 };
 
 // data and firestore
 var data = [];
 
-dashdb.collection('smsresponse').onSnapshot(res => {
+dashdb.collection('surveyresponse').onSnapshot(res => {
 
   res.docChanges().forEach(change => {
 
@@ -151,3 +150,4 @@ dashdb.collection('smsresponse').onSnapshot(res => {
   update(data);
 
 });
+

@@ -16,27 +16,27 @@
         <h4 class="white-text center">Data Pipeline Dashboard</h4>
       </div> 
     </div>
-    <div class="container section">
-    <div class="row">
-        <div >
-          <div class="canvas1"></div>
+    
+  
+      <div class="row">
+        <div class='s6 m12 l12'>
+          <div class=surveygraph></div>
         </div>
-        <div >
-          <div class="canvas2"></div>
+        <div class='s6 m12 l12'>
+          <div class=canva></div>
         </div>
-
-    </div>
-    <div class ="row">
-      <div >
-        <div class="canvas3"></div>
-      </div>
-      <div >
-        <div class="canvas4"></div>
       </div>
 
-    </div>
-   
-    </div>
+      <div class="row">
+        <div class='s6 m12 l12'>
+          <div class=statusgraph></div>
+        </div>
+        <div class='s6 m12 l12'>
+          <div class=statuscircle></div>
+        </div>
+      </div>
+
+
     <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-firestore.js"></script>
     <script>
@@ -55,6 +55,7 @@
       dashdb.settings(settings);
     </script>
   <script src="https://d3js.org/d3.v5.js"></script>
-<script src="dash.js"></script>
+<script src="surveygraph.js"></script>
+<script src="statusgraph.js"></script>
 </body>
 </html>

@@ -1,8 +1,3 @@
-
-//Formating TimeStamp  
-var timeFormat = d3.timeFormat("%m-%d-%y %H:%M:%S");
-
-
 // append the svg obgect to the demograph class of the page
 // moves the svg object to the top left Margin
 
@@ -14,49 +9,56 @@ var statusgraph = d3.select(".statusgraph").append("svg")
           "translate(" + Margin.left + "," + Margin.top + ")"); 
 
 
-// update function
-const systemupdate = (systemdata) => {
-     //format the data
-systemdata.forEach(function(d) {
-    d.Date = +d.Date.toDate();
-    d.systemup = +d.systemup;
-    d.systemdown = +d.systemdown;
-  });
-  
-  last = Object.keys(systemdata)[Object.keys(systemdata).length-1];
-  //console.log(y(last))
-  systemdata.sort((a,b) => new Date(a.Date) - new Date(b.Date));
-
-  // set scale domains
-  x.domain(d3.extent(systemdata, function(d) { return d.Date; }));
-  y.domain([0, d3.max(systemdata, function(d) {return Math.max(d.systemdown, d.systemup); })]);
+//Formating TimeStamp  
+var timeFormat = d3.timeFormat("%H:%M:%S");
 
   // d3 line path generator
 // define the 1st line
-const valueline = d3.line()
-//.curve(d3.curveCardinal)
-.x(function(d) { return x(d.Date); })
+const statusline = d3.line()
+.curve(d3.curveBasis)	
+.x(function(d){ return x(new Date(d.Date))})
 .y(function(d) { return y(d.systemup); });
 
 // define the 2nd line
-const valueline2 = d3.line()
-//.curve(d3.curveCardinal)
-.x(function(d) { return x(d.Date); })
+const statusline2 = d3.line()
+.curve(d3.curveBasis)
+.x(function(d){ return x(new Date(d.Date))})
 .y(function(d) { return y(d.systemdown); });
 
+// line path element
+const systemuppath = statusgraph.append('path');
+const systemdownpath = statusgraph.append('path');
+
+// update function
+const systemupdate = (systemdata) => {
+
+     //format the data
+systemdata.forEach(function(d) {
+  d.Date= new Date(d.Date).toString();
+    d.systemup = +d.systemup;
+    d.systemdown = +d.systemdown;
+  });
+
+  //console.log(systemdata)
+ 
+
+  systemdata.sort((a,b) => new Date(a.Date) - new Date(b.Date));
+
+  // set scale domains
+  x.domain(d3.extent(systemdata, d => new Date(d.Date)));
+  y.domain([0, d3.max(systemdata, function(d) {return Math.max(d.systemdown, d.systemup); })]);
+
   // update path data
-        //line 1
-    statusgraph.append('path')
-        .data([systemdata])
+        //System Up line 
+    systemuppath.data([systemdata])
         .attr("class", "line")
-        .attr("d", valueline);
+        .attr("d", statusline);
     
-        //line 2
-    statusgraph.append('path')
-        .data([systemdata])
+        //system Down line
+    systemdownpath.data([systemdata])
         .attr("class", "line")
         .style("stroke", "red")
-        .attr("d", valueline2);
+        .attr("d", statusline2);
 
     // Add the X Axis
 statusgraph.append("g")
@@ -86,17 +88,16 @@ statusgraph.append("g")
         .style("text-anchor", "middle")
         .text("Status");
 
-  //console.log(systemdata.systemdown)
         //Female Line label
     statusgraph.append("text")
-      .attr("transform", "translate("+(Width+3)+","+ y(systemdata[6].systemdown)+")")
+      .attr("transform", "translate("+(Width+3)+","+ y(systemdata[7].systemdown)+")")
       .attr("dy", ".35em")
       .attr("text-anchor", "start")
       .style("fill", "red")
       .text("Down");
         //Male Line label
     statusgraph.append("text")
-      .attr("transform", "translate("+(Width+3)+","+ y(systemdata[6].systemup)+")")
+      .attr("transform", "translate("+(Width+3)+","+ y(systemdata[7].systemup)+")")
       .attr("dy", ".35em")
       .attr("text-anchor", "start")
       .style("fill", "steelblue")
@@ -111,18 +112,28 @@ statusgraph.append("g")
         .style("text-decoration", "bold") 	
         .text("System Uptime Graph");
 
-    
-    var svgContainer = d3.select(".statuscircle")
-        .append("svg")
-            .attr("width", 200)
-            .attr("height", 200);
+       // Graph title
+       statusgraph.append("text")
+       .attr("x", (Width / 2))				
+       .attr("y", 0 - (Margin.top / 2))
+       .attr("text-anchor", "middle")	
+       .style("font-size", "20px") 
+       .style("text-decoration", "bold") 	
+       .text("System Uptime Graph");
 
-    //Draw the Circle
-    var circle = svgContainer.append("circle")
-        .attr("cx", 100)
-        .attr("cy", 100)
-        .attr("r", 50)
-        .attr('fill','green')
+   
+   var svgContainer = d3.select(".statuscircle")
+       .append("svg")
+           .attr("width", 400)
+           .attr("height", 400);
+
+   //Draw the Circle
+   var circle = svgContainer.append("circle")
+       .attr("cx", 100)
+       .attr("cy", 100)
+       .attr("r", 50)
+       .attr('fill','green')
+
 };
 
 // data and firestore

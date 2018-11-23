@@ -2,11 +2,6 @@ const Margin = { top: 40, right: 60, bottom: 50, left: 70 };
 const Width = 800 - Margin.right - Margin.left;
 const Height = 450 - Margin.top - Margin.bottom;
 
-
-//Formating TimeStamp  
-var timeFormat = d3.timeFormat("%m-%d-%y %H:%M:%S");
-
-
 // append the svg obgect to the demograph class of the page
 // moves the svg object to the top left Margin
 
@@ -17,51 +12,59 @@ var surveygraph = d3.select(".surveygraph").append("svg")
     .attr("transform",
           "translate(" + Margin.left + "," + Margin.top + ")"); 
 
+          //Formating TimeStamp  
+var timeFormat = d3.timeFormat("%m-%d-%y %H:%M:%S");
 
 // scales
 const x = d3.scaleTime().range([0, Width]);
 const y = d3.scaleLinear().range([Height, 0]);
 
-// update function
-const update = (data) => {
-     //format the data
-  data.forEach(function(d) {
-    d.Date = +d.Date.toDate();
-    d.Qn1 = +d.Qn1;
-    d.Qn2 = +d.Qn2;
-  });
-  
-
-  data.sort((a,b) => new Date(a.Date) - new Date(b.Date));
-
-  // set scale domains
-  x.domain(d3.extent(data, function(d) { return d.Date; }));
-  y.domain([0, d3.max(data, function(d) {return Math.max(d.Qn1, d.Qn2); })]);
-
-
-  // d3 line path generator
+// d3 line path generator
 // define the 1st line
 const valueline = d3.line()
-//.curve(d3.curveCardinal)
-.x(function(d) { return x(d.Date); })
+.curve(d3.curveBasis)	
+
+.x(function(d){ return x(new Date(d.Date))})
 .y(function(d) { return y(d.Qn1); });
 
 // define the 2nd line
 const valueline2 = d3.line()
-//.curve(d3.curveCardinal)
-.x(function(d) { return x(d.Date); })
+.curve(d3.curveBasis)
+.x(function(d){ return x(new Date(d.Date))})
 .y(function(d) { return y(d.Qn2); });
+
+// line path element
+const Qn1path = surveygraph.append('path');
+const Qn2path = surveygraph.append('path');
+
+// update function
+const update = (data) => {
+
+     //format the data  
+  data.forEach(function(d) {
+   d.Date= new Date(d.Date).toString();
+    d.Qn1 = +d.Qn1;
+    d.Qn2 = +d.Qn2;
+  }); 
+  
+  //console.log(data)
+
+
+  data.sort((a,b) => new Date(a.Date) - new Date(b.Date));
+
+  // set scale domains
+  //x.domain(d3.extent(data, function(d) { return d.Date; }));
+  x.domain(d3.extent(data, d => new Date(d.Date)));
+  y.domain([0, d3.max(data, function(d) {return Math.max(d.Qn1, d.Qn2); })]);
 
   // update path data
         //line 1
-    surveygraph.append('path')
-        .data([data])
+      Qn1path.data([data])
         .attr("class", "line")
         .attr("d", valueline);
     
         //line 2
-    surveygraph.append('path')
-        .data([data])
+      Qn2path.data([data])
         .attr("class", "line")
         .style("stroke", "red")
         .attr("d", valueline2);
@@ -96,7 +99,6 @@ const valueline2 = d3.line()
 
 
         //Qn2 Line label
-  //last = Object.keys(data)[Object.keys(data).length-1];
       surveygraph.append("text")
       .attr("transform", "translate("+(Width+3)+","+ y(data[4].Qn2)+")")
       .attr("dy", ".35em")

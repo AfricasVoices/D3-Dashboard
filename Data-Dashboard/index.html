@@ -9,36 +9,40 @@
   <link rel="stylesheet" href="styles.css">
   <title>Data Pipeline Dashboard</title>
 </head>
-<body class="blue-grey lighten-5">
-
-    <div class="nav z-depth-0">
-      <div class="section center">
-        <h4 class="white-text center">Data Pipeline Dashboard</h4>
-      </div> 
-    </div>
+<body class="white">
+  <nav class='nav'>
+		<div>
+				<a href="https://www.africasvoices.org/wp-content/themes/africa/static/img/africas-voices-logo-pad.svg" class="brand-logo left">Data Pipeline Dashboard</a>
+				<ul class="right hide-on-med-and-down">
+            <li><a href="#!">MAAP</a></li>
+            <li><a href="#!">MASTERCARD</a></li>            
+            <li><a href="#!">WUSC</a></li>
+            <li><a href="#!">WELLCOME</a></li>
+            <li><a href="#!">SSF</a></li>
+            <li><a href="#!">ICRAF</a></li>
+				</ul>
+		</div>
+</nav>
     
-  
+    <div class="container">
       <div class="row">
-        <div class='s6 m12 l12'>
-          <div class=surveygraph></div>
-        </div>
-        <div class='s6 m12 l12'>
-          <div class=canva></div>
-        </div>
+        <div class='col s8 surveygraph'></div>
+        <div class='col s4 canva'><b>Response Rate</b></div>
       </div>
 
       <div class="row">
-        <div class='s6 m12 l12'>
-          <div class=statusgraph></div>
-        </div>
-        <div class='s6 m12 l12'>
-          <div class=statuscircle></div>
-        </div>
+        <div class='col s8 statusgraph'></div>
+        <div class='col s4 statuscircle'></div>
       </div>
+    </div>
 
 
     <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-firestore.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
     <script>
     // Initialize Firebase
     var config = {
@@ -57,5 +61,6 @@
   <script src="https://d3js.org/d3.v5.js"></script>
 <script src="surveygraph.js"></script>
 <script src="statusgraph.js"></script>
+<script src="index.js"></script>
 </body>
 </html>

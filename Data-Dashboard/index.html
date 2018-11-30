@@ -15,19 +15,19 @@
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
   <script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCiVcO6RuGxMPMDI2SiTpjcdXtko-PFAbw",
-    authDomain: "learning-d3.firebaseapp.com",
-    databaseURL: "https://learning-d3.firebaseio.com",
-    projectId: "learning-d3",
-    storageBucket: "learning-d3.appspot.com",
-    messagingSenderId: "405879847462"
-  };
-    firebase.initializeApp(config);
-    const dashdb = firebase.firestore();
-    const settings = {timestampsInSnapshots: true};
-    dashdb.settings(settings);
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCiVcO6RuGxMPMDI2SiTpjcdXtko-PFAbw",
+        authDomain: "learning-d3.firebaseapp.com",
+        databaseURL: "https://learning-d3.firebaseio.com",
+        projectId: "learning-d3",
+        storageBucket: "learning-d3.appspot.com",
+        messagingSenderId: "405879847462"
+      };
+        firebase.initializeApp(config);
+        const dashdb = firebase.firestore();
+        const settings = {timestampsInSnapshots: true};
+        dashdb.settings(settings);
   </script>
   <script src="https://d3js.org/d3.v5.js"></script>
   <script src="surveygraph.js"></script>

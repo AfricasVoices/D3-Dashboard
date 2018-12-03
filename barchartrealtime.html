@@ -4,31 +4,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Sms Survey</title>
-<!-- Compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
 <body> 
     <div class=container>
       <h5>SMS Feedback Per Survey</h5>
       <div class="canvas"></div>  
     </div>
-  <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-firestore.js"></script>
-  <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyCiVcO6RuGxMPMDI2SiTpjcdXtko-PFAbw",
-      authDomain: "learning-d3.firebaseapp.com",
-      databaseURL: "https://learning-d3.firebaseio.com",
-      projectId: "learning-d3",
-      storageBucket: "learning-d3.appspot.com",
-      messagingSenderId: "405879847462"
-    };
-    firebase.initializeApp(config);
-    const smsdb =firebase.firestore();
-    smsdb.settings({timestampsInSnapshots: true});
-  </script>
-  <script src="https://d3js.org/d3.v5.min.js"></script>    
-  <script src="barchartrealtime.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-firestore.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCiVcO6RuGxMPMDI2SiTpjcdXtko-PFAbw",
+        authDomain: "learning-d3.firebaseapp.com",
+        databaseURL: "https://learning-d3.firebaseio.com",
+        projectId: "learning-d3",
+        storageBucket: "learning-d3.appspot.com",
+        messagingSenderId: "405879847462"
+      };
+      firebase.initializeApp(config);
+      const smsdb =firebase.firestore();
+      smsdb.settings({timestampsInSnapshots: true});
+    </script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>    
+    <script src="barchartrealtime.js"></script>
 </body>
 </html>
